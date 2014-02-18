@@ -1,0 +1,36 @@
+{
+  "name": "acutisweb",
+  "version": "0.0.0",
+  "description": "Homepage for acutisweb.com",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha tests/**/**",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/js62789/acutisweb.git"
+  },
+  "keywords": [
+    "acutis",
+    "web",
+    "solutions"
+  ],
+  "contributors": [
+    {
+      "name": "Jeffrey Smith",
+      "email": "js62789@gmail.com"
+    }
+  ],
+  "author": "Acutis Web Solutions, LLC",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/js62789/acutisweb/issues"
+  },
+  "homepage": "https://github.com/js62789/acutisweb",
+  "dependencies": {
+    "express": "~3.4.8",
+    "jade": "~1.1.5",
+    "less-middleware": "git://github.com/js62789/less.js-middleware#master"
+  }
+}
