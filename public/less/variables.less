@@ -1,0 +1,40 @@
+// Colors
+@gray-darker:           lighten(#000, 13.5%); // #222
+@gray-dark:             lighten(#000, 20%);   // #333
+@gray:                  lighten(#000, 33.5%); // #555
+@gray-light:            lighten(#000, 60%);   // #999
+@gray-lighter:          lighten(#000, 93.5%); // #eee
+
+@brand-primary:         #428bca;
+@brand-success:         #5cb85c;
+@brand-info:            #5bc0de;
+@brand-warning:         #f0ad4e;
+@brand-danger:          #d9534f;
+
+// Links
+@link-color:            @brand-primary;
+@link-hover-color:      darken(@link-color, 15%);
+
+// Typography
+@font-family-base:      "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
+@font-family-headers:   "Questrial", "Helvetica Neue", Helvetica, Arial, sans-serif;
+@font-family-brand:     "Alegreya Sans SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
+@font-size-base:        14px;
+@font-size-large:       ceil((@font-size-base * 1.25)); // ~18px
+@font-size-small:       ceil((@font-size-base * 0.85)); // ~12px
+//** Unit-less `line-height` for use in components like buttons.
+@line-height-base:      1.428571429; // 20/14
+//** Computed "line-height" (`font-size` * `line-height`) for use with `margin`, `padding`, etc.
+@line-height-computed:  floor((@font-size-base * @line-height-base)); // ~20px
+
+@text-color:            @gray-dark;
+@body-bg:               white;
+
+// Screens
+@screen-sm-min:         500px;
+@screen-md-min:         700px;
+@screen-lg-min:         900px;
+
+@container-sm:          500px;
+@container-md:          700px;
+@container-lg:          900px;

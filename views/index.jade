@@ -25,9 +25,78 @@ html
         
   body
     block header
+      .hero
+        .container
+          header.header
+            nav.nav
+              a.nav-item(href='#') Home
+              a.nav-item(href='#') Blog
+              a.nav-item(href='#') About Us
+              a.nav-item(href='#') Contact Us
+            h1.brand 
+              a(href='#') Acutis
+
+          h1.hero-body Modern Web Applications are Born Here
 
     block body
+      .featurette.featurette-dark.inverse
+        .container
+          .row
+            .col-sm-4
+              h2 Server Management
+              p Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah.
+            .col-sm-4
+              h2 Database Architecture
+              p Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah.
+            .col-sm-4
+              h2 Dynamic Web Apps
+              p Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah.
+
+      .featurette
+        .container
+          center
+            h1 Want more details? Please fill out an inquiry below.
+          form.form.form-min
+            .form-group
+              .col-sm-12
+                input.text-input(type='text', name='name', placeholder='Name')
+            .form-group
+              .col-sm-6
+                input.text-input(type='tel', name='phone', placeholder='Phone')
+              .col-sm-6
+                input.text-input(type='email', name='email', placeholder='Email')
+            .form-group
+              .col-sm-12
+                label(for='description') How can we help?
+                textarea.text-input(id='description', name='description', rows='5')
+            .form-group
+              .col-sm-12
+                  input.btn(type='submit', value='Submit')
 
     block footer
+      footer.footer
+        .container
+          .row
+            .col-sm-8
+              h1 Get Connected
+              ul
+                li Call
+                li Email
+                li Facebook
+                li Twitter
+                li Instagram
+            .col-sm-4
+              h1 Get Around
+              ul
+                li
+                  a(href='#') Link
+                li
+                  a(href='#') Link
+                li
+                  a(href='#') Link
+                li
+                  a(href='#') Link
 
     block scripts
+      if env === 'development'
+        script(src='http://localhost:35729/livereload.js')

@@ -25,7 +25,24 @@ app.configure('development', function(){
     src: '/less',
     prefix: '/css',
     root: path.join(__dirname, 'public'),
-    compress: 'auto'
+    compress: 'auto',
+    autoprefix: ["last 7 versions", "> 10%"],
+  }));
+  app.use(app.router);
+  app.use(express.static(path.join(__dirname, '/public')));
+  app.use(express.errorHandler());
+});
+
+app.configure('production', function(){
+  app.set('views', __dirname + '/views');
+  app.set('view engine', 'jade');
+  app.use(express.json());
+  app.use(express.urlencoded());
+  app.use(express.cookieParser());
+  app.use(express.session({
+    store: new MemoryStore(),
+    secret: 'supersecret',
+    key: app.settings.env + '_sid'
   }));
   app.use(app.router);
   app.use(express.static(path.join(__dirname, '/public')));
@@ -34,7 +51,8 @@ app.configure('development', function(){
 
 app.get('/', function (req, res) {
   res.render('index', {
-    title: 'Acutis Web Solutions, LLC'
+    title: 'Acutis Web Solutions, LLC',
+    env: app.settings.env
   });
 });
 
