@@ -1,102 +1,41 @@
-doctype
-html
-  head
-    title= title
+extends master
 
-    meta(charset='utf-8')
-    meta(http-equiv='X-UA-Compatible', content='IE=edge')
-    meta(name='description', content='')
-    meta(name='viewport', content='width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no')
+block header
+  .hero
+    include partials/header
+    h1.hero-body Modern Web Applications are Born Here
 
-    meta(name='apple-mobile-web-app-capable', content='yes')
+block body
+  .featurette.featurette-dark.inverse(id='strengths')
+    .container
+      .row
+        .col-sm-4
+          h2 Server Management
+          p Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah.
+        .col-sm-4
+          h2 Database Architecture
+          p Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah.
+        .col-sm-4
+          h2 Dynamic Web Apps
+          p Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah.
 
-    link(rel='apple-touch-icon', href='/img/ios/apple-touch-icon-57x57-precomposed.png')
-    // iPhone
-    link(rel='apple-touch-icon', sizes='57x57', href='/img/ios/apple-touch-icon-57x57-precomposed.png')
-    // iPad
-    link(rel='apple-touch-icon', sizes='72x72', href='/img/ios/apple-touch-icon-72x72-precomposed.png')
-    // iPhone (Retina)
-    link(rel='apple-touch-icon', sizes='114x114', href='/img/ios/apple-touch-icon-114x114-precomposed.png')
-    // iPad (Retina)
-    link(rel='apple-touch-icon', sizes='144x144', href='/img/ios/apple-touch-icon-144x144-precomposed.png')
-
-    block css
-      link(rel='stylesheet', type='text/css', href='/css/index.css')
-        
-  body
-    block header
-      .hero
-        .container
-          header.header
-            nav.nav
-              a.nav-item(href='#') Home
-              a.nav-item(href='#') Blog
-              a.nav-item(href='#') About Us
-              a.nav-item(href='#') Contact Us
-            h1.brand 
-              a(href='#') Acutis
-
-          h1.hero-body Modern Web Applications are Born Here
-
-    block body
-      .featurette.featurette-dark.inverse
-        .container
-          .row
-            .col-sm-4
-              h2 Server Management
-              p Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah.
-            .col-sm-4
-              h2 Database Architecture
-              p Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah.
-            .col-sm-4
-              h2 Dynamic Web Apps
-              p Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah.
-
-      .featurette
-        .container
-          center
-            h1 Want more details? Please fill out an inquiry below.
-          form.form.form-min
-            .form-group
-              .col-sm-12
-                input.text-input(type='text', name='name', placeholder='Name')
-            .form-group
-              .col-sm-6
-                input.text-input(type='tel', name='phone', placeholder='Phone')
-              .col-sm-6
-                input.text-input(type='email', name='email', placeholder='Email')
-            .form-group
-              .col-sm-12
-                label(for='description') How can we help?
-                textarea.text-input(id='description', name='description', rows='5')
-            .form-group
-              .col-sm-12
-                  input.btn(type='submit', value='Submit')
-
-    block footer
-      footer.footer
-        .container
-          .row
-            .col-sm-8
-              h1 Get Connected
-              ul
-                li Call
-                li Email
-                li Facebook
-                li Twitter
-                li Instagram
-            .col-sm-4
-              h1 Get Around
-              ul
-                li
-                  a(href='#') Link
-                li
-                  a(href='#') Link
-                li
-                  a(href='#') Link
-                li
-                  a(href='#') Link
-
-    block scripts
-      if env === 'development'
-        script(src='http://localhost:35729/livereload.js')
+  .featurette(id='contactus')
+    .container
+      center
+        h1 Want more details? Please fill out an inquiry below.
+      form.form.form-min
+        .form-group
+          .col-sm-12
+            input.text-input(type='text', name='name', placeholder='Name')
+        .form-group
+          .col-sm-6
+            input.text-input(type='tel', name='phone', placeholder='Phone')
+          .col-sm-6
+            input.text-input(type='email', name='email', placeholder='Email')
+        .form-group
+          .col-sm-12
+            label(for='description') How can we help?
+            textarea.text-input(id='description', name='description', rows='5')
+        .form-group
+          .col-sm-12
+              input.btn(type='submit', value='Submit')

@@ -31,10 +31,12 @@
   "dependencies": {
     "express": "~3.4.8",
     "jade": "~1.1.5",
-    "less-middleware": "git://github.com/js62789/less.js-middleware#master"
+    "less-middleware": "git://github.com/js62789/less.js-middleware#master",
+    "mysql": "~2.1.0"
   },
   "devDependencies": {
     "grunt": "~0.4.2",
-    "grunt-contrib-watch": "~0.5.3"
+    "grunt-contrib-watch": "~0.5.3",
+    "mocha": "~1.17.1"
   }
 }

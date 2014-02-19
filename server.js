@@ -56,6 +56,13 @@ app.get('/', function (req, res) {
   });
 });
 
+app.get('/blog', function (req, res) {
+  res.render('blog', {
+    title: 'Acutis Web Solutions, LLC',
+    env: app.settings.env
+  });
+});
+
 app.listen(config.port, function () {
   console.log('Server is running on port ' + config.port);
 });

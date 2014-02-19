@@ -1,0 +1,58 @@
+doctype
+html
+  head
+    title= title
+
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='description', content='')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no')
+
+    meta(name='apple-mobile-web-app-capable', content='yes')
+
+    link(rel='apple-touch-icon', href='/img/ios/apple-touch-icon-57x57-precomposed.png')
+    // iPhone
+    link(rel='apple-touch-icon', sizes='57x57', href='/img/ios/apple-touch-icon-57x57-precomposed.png')
+    // iPad
+    link(rel='apple-touch-icon', sizes='72x72', href='/img/ios/apple-touch-icon-72x72-precomposed.png')
+    // iPhone (Retina)
+    link(rel='apple-touch-icon', sizes='114x114', href='/img/ios/apple-touch-icon-114x114-precomposed.png')
+    // iPad (Retina)
+    link(rel='apple-touch-icon', sizes='144x144', href='/img/ios/apple-touch-icon-144x144-precomposed.png')
+
+    block css
+      link(rel='stylesheet', type='text/css', href='/css/index.css')
+        
+  body
+    block header
+      include partials/header
+
+    block body
+
+    block footer
+      footer.footer
+        .container
+          .row
+            .col-sm-8
+              h1 Get Connected
+              ul
+                li Call
+                li Email
+                li Facebook
+                li Twitter
+                li Instagram
+            .col-sm-4
+              h1 Get Around
+              ul
+                li
+                  a(href='#') Link
+                li
+                  a(href='#') Link
+                li
+                  a(href='#') Link
+                li
+                  a(href='#') Link
+
+    block scripts
+      if env === 'development'
+        script(src='http://localhost:35729/livereload.js')
