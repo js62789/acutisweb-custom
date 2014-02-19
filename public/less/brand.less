@@ -1,9 +1,19 @@
 .brand {
+  float: left;
   font-size: 250%;
   font-family: @font-family-brand;
   margin: 0;
 
   a:hover {
     text-decoration: none;
+  }
+}
+
+@media (max-width: @screen-sm-min) {
+  .brand {
+    display: block;
+    text-align: center;
+    float: none;
+    border-bottom: 1px solid @gray-light;
   }
 }

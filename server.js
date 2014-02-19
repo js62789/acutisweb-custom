@@ -49,9 +49,22 @@ app.configure('production', function(){
   app.use(express.errorHandler());
 });
 
+var requireAdmin = function (req, res, next) {
+  if (req.session.user && req.session.user.admin) {
+    next();
+  } else {
+    res.render('admin_login', {
+      title: 'Acutis Web Solutions, LLC',
+      session: req.session,
+      env: app.settings.env
+    });
+  }
+};
+
 app.get('/', function (req, res) {
   res.render('index', {
     title: 'Acutis Web Solutions, LLC',
+    session: req.session,
     env: app.settings.env
   });
 });
@@ -59,6 +72,50 @@ app.get('/', function (req, res) {
 app.get('/blog', function (req, res) {
   res.render('blog', {
     title: 'Acutis Web Solutions, LLC',
+    session: req.session,
+    env: app.settings.env
+  });
+});
+
+app.get('/blog/article/:article_id', function (req, res) {
+  res.render('article', {
+    title: 'Acutis Web Solutions, LLC',
+    session: req.session,
+    env: app.settings.env
+  });
+});
+
+app.get('/admin', requireAdmin, function (req, res) {
+  res.render('admin', {
+    title: 'Acutis Web Solutions, LLC',
+    session: req.session,
+    env: app.settings.env
+  });
+});
+
+app.post('/admin/login', function (req, res) {
+  req.session.user = {};
+  req.session.user.admin = true;
+  res.redirect('/admin');
+});
+
+app.get('/admin/logout', function (req, res) {
+  req.session.destroy();
+  res.redirect('/');
+});
+
+app.get('/admin/article/:article_id', requireAdmin, function (req, res) {
+  res.render('admin_article', {
+    title: 'Acutis Web Solutions, LLC',
+    session: req.session,
+    env: app.settings.env
+  });
+});
+
+app.get('/admin/article', requireAdmin, function (req, res) {
+  res.render('admin_article', {
+    title: 'Acutis Web Solutions, LLC',
+    session: req.session,
     env: app.settings.env
   });
 });

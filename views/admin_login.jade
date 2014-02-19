@@ -1,0 +1,18 @@
+extends master
+
+block body
+  .container
+    form.form(action='/admin/login', method='POST')
+      .form-group
+        .col-md-3
+          label.label(for='username') Username
+        .col-md-6
+          input(id='username', type='text', name='username')
+      .form-group
+        .col-md-3
+          label.label(for='password') Password
+        .col-md-6
+          input(id='password', type='password', name='password')
+      .form-group
+        .col-md-9
+          input.btn.btn-primary(type='submit', value='Login')

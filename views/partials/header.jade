@@ -1,9 +1,11 @@
 header.header
   .container
+    h1.brand 
+      a(href='#') Acutis
     nav.nav
       a.nav-item(href='/') Home
       a.nav-item(href='/blog') Blog
       a.nav-item(href='/#strengths') About Us
       a.nav-item(href='/#contactus') Contact Us
-    h1.brand 
-      a(href='#') Acutis
+      if session && session.user && session.user.admin
+        a.nav-item(href='/admin/logout') Logout

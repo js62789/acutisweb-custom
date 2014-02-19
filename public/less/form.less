@@ -33,11 +33,32 @@
 .btn {
   display: inline-block;
   vertical-align: middle;
-  border: 1px solid #bbb;
   background-color: transparent;
   padding: 4px 6px;
+  color: inherit;
+  border: 1px solid rgba(0,0,0,0.1);
 
   &:hover {
+    text-decoration: none;
+    color: inherit;
     background-color: rgba(0,0,0,0.05);
+  }
+
+  &.btn-primary {
+    color: white;
+    background-color: @brand-primary;
+
+    &:hover {
+      background-color: darken(@brand-primary, 5%);
+    }
+  }
+
+  &.btn-danger {
+    color: white;
+    background-color: @brand-danger;
+
+    &:hover {
+      background-color: darken(@brand-danger, 5%);
+    }
   }
 }

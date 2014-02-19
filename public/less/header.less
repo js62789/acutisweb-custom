@@ -1,7 +1,14 @@
 .header {
-  padding: 10px 0;
+  padding: 10px 0px;
 
   a {
     color: inherit;
+  }
+}
+
+@media (max-width: @screen-sm-min) {
+  .header {
+    padding: 0px;
+    border-bottom: 1px solid @gray-light;
   }
 }
