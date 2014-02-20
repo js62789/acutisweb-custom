@@ -14,6 +14,15 @@ describe('Sql utility', function () {
       assert(sqlStatement === shouldBe);
     });
 
+    it('should create a where in string', function () {
+      var where = {
+        age: [3, 4, 5]
+      };
+      var sqlStatement = sql.where(where);
+      var shouldBe = "`age` IN (3, 4, 5)";
+      assert(sqlStatement === shouldBe);
+    });
+
     it('should create a like clause', function () {
       var where = {
         like: {

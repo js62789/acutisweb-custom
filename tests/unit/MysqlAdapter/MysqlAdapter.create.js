@@ -12,13 +12,13 @@ describe('Mysql adapter', function () {
   describe('.create()', function () {
 
     after(function (done) {
-      mysqlAdapter.destroy('user', {where: {username: 'deleteme'}}, function (err, results) {
+      mysqlAdapter.destroy('user', {where: {username: ['deleteme', 'deleteme2']}}, function (err, results) {
         if (err) done(err);
         done();
       });
     });
 
-    it('should create a single record', function (done) {
+    it('should return the record id', function (done) {
       var userData = {
         email: 'deleteme@test.com',
         password: 'deleteme',
@@ -26,9 +26,32 @@ describe('Mysql adapter', function () {
         first_name: 'delete',
         last_name: 'me'
       };
-      mysqlAdapter.create('user', userData, function (err, results) {
+      mysqlAdapter.create('user', userData, function (err, id) {
         assert(!err);
-        assert(results);
+        assert(id);
+        assert(typeof id === 'number');
+        done();
+      });
+    });
+
+    it('should create many records', function (done) {
+      var userData = [{
+        email: 'deleteme@test.com',
+        password: 'deleteme',
+        username: 'deleteme',
+        first_name: 'delete',
+        last_name: 'me'
+      },{
+        email: 'deleteme2@test.com',
+        password: 'deleteme2',
+        username: 'deleteme2',
+        first_name: 'delete2',
+        last_name: 'me2'
+      }];
+
+      mysqlAdapter.create('user', userData, function (err, id) {
+        assert(!err);
+        assert(id);
         done();
       });
     });
