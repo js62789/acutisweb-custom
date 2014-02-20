@@ -26,33 +26,20 @@ html
         
   body
     block header
-      include partials/header
+      header.header
+        .container
+          h1.brand 
+            a(href='#') Acutis
 
     block body
-
-    block footer
-      footer.footer
-        .container
-          .row
-            .col-sm-8
-              h1 Get Connected
-              ul
-                li Call
-                li Email
-                li Facebook
-                li Twitter
-                li Instagram
-            .col-sm-4
-              h1 Get Around
-              ul
-                li
-                  a(href='/admin') Admin
-                li
-                  a(href='#') Link
-                li
-                  a(href='#') Link
-                li
-                  a(href='#') Link
+      .container
+        .row
+          .col-sm-3
+            nav.nav.nav-vert
+              a.nav-item(href='/admin/users') Users
+              a.nav-item(href='/admin/articles') Blog
+          .col-sm-9
+            block content
 
     block scripts
       if env === 'development'

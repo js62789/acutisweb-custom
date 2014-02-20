@@ -53,10 +53,11 @@ var requireAdmin = function (req, res, next) {
   if (req.session.user && req.session.user.admin) {
     next();
   } else {
-    res.render('admin_login', {
+    res.render('admin/login', {
       title: 'Acutis Web Solutions, LLC',
       session: req.session,
-      env: app.settings.env
+      env: app.settings.env,
+      host: req.host
     });
   }
 };
@@ -65,7 +66,8 @@ app.get('/', function (req, res) {
   res.render('index', {
     title: 'Acutis Web Solutions, LLC',
     session: req.session,
-    env: app.settings.env
+    env: app.settings.env,
+    host: req.host
   });
 });
 
@@ -73,7 +75,8 @@ app.get('/blog', function (req, res) {
   res.render('blog', {
     title: 'Acutis Web Solutions, LLC',
     session: req.session,
-    env: app.settings.env
+    env: app.settings.env,
+    host: req.host
   });
 });
 
@@ -81,15 +84,17 @@ app.get('/blog/article/:article_id', function (req, res) {
   res.render('article', {
     title: 'Acutis Web Solutions, LLC',
     session: req.session,
-    env: app.settings.env
+    env: app.settings.env,
+    host: req.host
   });
 });
 
 app.get('/admin', requireAdmin, function (req, res) {
-  res.render('admin', {
+  res.render('admin/index', {
     title: 'Acutis Web Solutions, LLC',
     session: req.session,
-    env: app.settings.env
+    env: app.settings.env,
+    host: req.host
   });
 });
 
@@ -104,19 +109,57 @@ app.get('/admin/logout', function (req, res) {
   res.redirect('/');
 });
 
-app.get('/admin/article/:article_id', requireAdmin, function (req, res) {
-  res.render('admin_article', {
+app.get('/admin/users', requireAdmin, function (req, res) {
+  res.render('admin/users', {
     title: 'Acutis Web Solutions, LLC',
     session: req.session,
-    env: app.settings.env
+    env: app.settings.env,
+    host: req.host
+  });
+});
+
+app.get('/admin/user', requireAdmin, function (req, res) {
+  res.render('admin/user', {
+    title: 'Acutis Web Solutions, LLC',
+    session: req.session,
+    env: app.settings.env,
+    host: req.host
+  });
+});
+
+app.get('/admin/user/:user_id', requireAdmin, function (req, res) {
+  res.render('admin/user', {
+    title: 'Acutis Web Solutions, LLC',
+    session: req.session,
+    env: app.settings.env,
+    host: req.host
+  });
+});
+
+app.get('/admin/articles', requireAdmin, function (req, res) {
+  res.render('admin/articles', {
+    title: 'Acutis Web Solutions, LLC',
+    session: req.session,
+    env: app.settings.env,
+    host: req.host
   });
 });
 
 app.get('/admin/article', requireAdmin, function (req, res) {
-  res.render('admin_article', {
+  res.render('admin/article', {
     title: 'Acutis Web Solutions, LLC',
     session: req.session,
-    env: app.settings.env
+    env: app.settings.env,
+    host: req.host
+  });
+});
+
+app.get('/admin/article/:article_id', requireAdmin, function (req, res) {
+  res.render('admin/article', {
+    title: 'Acutis Web Solutions, LLC',
+    session: req.session,
+    env: app.settings.env,
+    host: req.host
   });
 });
 

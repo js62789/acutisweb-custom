@@ -17,6 +17,8 @@ body {
   line-height: @line-height-base;
   color: @text-color;
   background-color: @body-bg;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1,
@@ -59,6 +61,10 @@ input[type="color"] {
   border-style: solid;
   border-color: #bbb;
   box-shadow: 0;
+
+  &:disabled {
+    background-color: rgba(0,0,0,0.1);
+  }
 }
 
 input[type="checkbox"] {

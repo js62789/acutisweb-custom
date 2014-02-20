@@ -1,0 +1,12 @@
+extends master
+
+block content
+  article
+    h1
+      input(type='text', name='title', placeholder='Article Title')
+    p
+      textarea(name='content', rows='20')
+    p
+      input(id='publish', type='checkbox', name='publish')
+      label.label(for='publish') Publish
+    input.btn(type='submit', value='Save')
