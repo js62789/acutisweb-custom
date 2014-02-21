@@ -2,19 +2,14 @@ extends master
 
 block content
   a.btn.btn-primary(href='/admin/article') Create Article
-  article
-    h1 
-      a(href='/blog/article/ABCDEF') Blog Article Title
-    p by Jeffrey Smith
-    p This is a preview of the article. This is a preview of the article. This is a preview of the article. This is a preview of the article. This is a preview of the article. This is a preview of the article. This is a preview of the article. This is a preview of the article. This is a preview of the article. This is a preview of the article. This is a preview of the article.
-    if session && session.user && session.user.admin
-      a.btn(href='/admin/article/ABCDEF') Edit
-      a.btn.btn-danger(href='#') Remove
-  article
-    h1 
-      a(href='/blog/article/ABCDEF') Blog Article Title
-    p by Jeffrey Smith
-    p This is a preview of the article. This is a preview of the article. This is a preview of the article. This is a preview of the article. This is a preview of the article. This is a preview of the article. This is a preview of the article. This is a preview of the article. This is a preview of the article. This is a preview of the article. This is a preview of the article.
-    if session && session.user && session.user.admin
-      a.btn(href='/admin/article/ABCDEF') Edit
-      a.btn.btn-danger(href='#') Remove
+  if articles
+    each article in articles
+      article
+        h1 
+          a(href='/blog/article/#{article.id}') #{article.title}
+        p by #{article.author_id}
+        p #{article.content}
+        a.btn(href='/admin/article/#{article.id}') Edit
+        a.btn.btn-danger(href='#') Remove
+  else
+    h1 There are no articles :(.

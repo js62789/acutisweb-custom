@@ -1,0 +1,23 @@
+extends master
+
+block content
+  table.table.table-striped
+    thead
+      th ID
+      th Name
+      th Email
+      th Sent
+      th
+    tbody
+      if inquiries
+        each inquiry in inquiries
+          tr(class=(inquiry.read ? '' : 'bold'))
+            td #{inquiry.id}
+            td #{inquiry.name}
+            td #{inquiry.email}
+            td #{inquiry.created_at}
+            td
+              a.btn(href='/admin/inquiry/#{inquiry.id}') Edit
+              a.btn.btn-danger(href='#') Remove
+      else
+        h1 There are no inquiries

@@ -1,12 +1,17 @@
 extends master
 
 block content
-  article
-    h1
-      input(type='text', name='title', placeholder='Article Title')
-    p
-      textarea(name='content', rows='20')
-    p
-      input(id='publish', type='checkbox', name='publish')
-      label.label(for='publish') Publish
-    input.btn(type='submit', value='Save')
+  form.form(action='/admin/article', method='POST')
+    article
+      if article
+        input(type='text', name='id', readonly='readonly', value=(article ? article.id : ''))
+      h1
+        input(type='text', name='title', placeholder='Article Title', value=(article ? article.title : ''))
+      p
+        textarea(name='content', rows='20')
+          if article
+            | #{article.content}
+      p
+        input(id='publish', type='checkbox', name='publish', checked=(article ? article.publish : false))
+        label.label(for='publish') Publish
+      input.btn(type='submit', value='Save')

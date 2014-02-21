@@ -1,0 +1,35 @@
+extends master
+
+block content
+  form.form
+    if inquiry
+      .form-group
+        .col-sm-3
+          label.label(for='id') ID
+        .col-sm-9
+          input(id='id', type='text', name='id', readonly='readonly', value=(inquiry ? inquiry.id : ''))
+      .form-group
+        .col-sm-3
+          label.label(for='created_at') Sent
+        .col-sm-9
+          input(id='created_at', type='text', name='created_at', value=(inquiry ? inquiry.created_at : ''))
+    .form-group
+      .col-sm-3
+        label.label(for='name') Name
+      .col-sm-9
+        input(id='name', type='text', name='name', value=(inquiry ? inquiry.name : ''))
+    .form-group
+      .col-sm-3
+        label.label(for='phone') Phone
+      .col-sm-9
+        input(id='phone', type='text', name='phone', value=(inquiry ? inquiry.phone : ''))
+    .form-group
+      .col-sm-3
+        label.label(for='description') Description
+      .col-sm-9
+        textarea(id='description', name='description', rows='10')
+          if inquiry
+            | #{inquiry.description}
+    .form-group
+      .col-sm-12
+        input.btn.btn-primary(type='submit', value='Save')

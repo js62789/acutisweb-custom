@@ -1,6 +1,7 @@
 extends master
 
 block content
+  a.btn.btn-primary(href='/admin/user') Create User
   table.table.table-striped
     thead
       th ID
@@ -8,17 +9,14 @@ block content
       th Email
       th
     tbody
-      tr
-        td 1
-        td test
-        td test@test.com
-        td
-          a.btn(href='/admin/user/ABCDEF') Edit
-          a.btn.btn-danger(href='#') Remove
-      tr
-        td 1
-        td test
-        td test@test.com
-        td
-          a.btn(href='/admin/user/ABCDEF') Edit
-          a.btn.btn-danger(href='#') Remove
+      if users
+        each user in users
+          tr
+            td #{user.id}
+            td #{user.username}
+            td #{user.email}
+            td
+              a.btn(href='/admin/user/#{user.id}') Edit
+              a.btn.btn-danger(href='#') Remove
+      else
+        h1 There are no users :(.

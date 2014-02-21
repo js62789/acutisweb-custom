@@ -25,7 +25,7 @@ block body
     .container
       center
         h1 Want more details? Please fill out an inquiry below.
-      form.form.form-min
+      form.form.form-min(action='/inquiry', method='POST')
         .form-group
           .col-sm-12
             input.text-input(type='text', name='name', placeholder='Name')

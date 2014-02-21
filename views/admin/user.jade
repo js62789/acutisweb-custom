@@ -1,22 +1,43 @@
 extends master
 
 block content
-  form.form
-    .form-group
-      .col-sm-3
-        label.label(for='id') ID
-      .col-sm-9
-        input(id='type', type='text', name='id', readonly='readonly', value=(user ? user.id : ''))
+  form.form(action='/admin/user', method='POST')
+    if user
+      .form-group
+        .col-sm-3
+          label.label(for='id') ID
+        .col-sm-9
+          input(id='id', type='text', name='id', readonly='readonly', value=user.id)
     .form-group
       .col-sm-3
         label.label(for='username') Username
       .col-sm-9
-        input(id='type', type='text', name='username', value=(user ? user.username : ''))
+        input(id='username', type='text', name='username', value=(user ? user.username : ''))
     .form-group
       .col-sm-3
         label.label(for='email') Email
       .col-sm-9
-        input(id='type', type='text', name='email', value=(user ? user.email : ''))
+        input(id='email', type='text', name='email', value=(user ? user.email : ''))
+    .form-group
+      .col-sm-3
+        label.label(for='password') Password
+      .col-sm-9
+        input(id='password', type='text', name='password', value=(user ? user.password : ''))
+    .form-group
+      .col-sm-3
+        label.label(for='first_name') First Name
+      .col-sm-9
+        input(id='first_name', type='text', name='first_name', value=(user ? user.first_name : ''))
+    .form-group
+      .col-sm-3
+        label.label(for='challenge') Challenge
+      .col-sm-9
+        input(id='challenge', type='text', name='challenge', value=(user ? user.challenge : ''))
+    .form-group
+      .col-sm-3
+        label.label(for='admin') Admin
+      .col-sm-9
+        input(id='admin', type='checkbox', name='admin', checked=(user ? user.admin : false))
     .form-group
       .col-sm-12
         input.btn.btn-primary(type='submit', value='Save')
