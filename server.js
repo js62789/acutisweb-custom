@@ -49,8 +49,21 @@ app.configure('production', function(){
   app.use(express.errorHandler());
 });
 
+// var MysqlAdapter = require('./lib/adapters/MysqlAdapter');
+// var mysqlAdapter = new MysqlAdapter(config.mysql);
+
+var MemoryAdapter = require('./lib/adapters/MemoryAdapter');
+var memoryAdapter = new MemoryAdapter();
+
+var UserCollection = require('./lib/collections/UserCollection');
+var users = new UserCollection({adapter: memoryAdapter});
+
+var ArticleCollection = require('./lib/collections/ArticleCollection');
+var articles = new ArticleCollection({adapter: memoryAdapter});
+
 var requireAdmin = function (req, res, next) {
-  if (req.session.user && req.session.user.admin) {
+  var session = req.session;
+  if (session.user && session.user.admin) {
     next();
   } else {
     res.render('admin/login', {
@@ -71,21 +84,41 @@ app.get('/', function (req, res) {
   });
 });
 
-app.get('/blog', function (req, res) {
-  res.render('blog', {
-    title: 'Acutis Web Solutions, LLC',
-    session: req.session,
-    env: app.settings.env,
-    host: req.host
+app.get('/blog', function (req, res, next) {
+  articles.find({limit: 10}, function (err, articles){
+    if (err) {
+      next(err);
+      return;
+    }
+
+    res.render('blog', {
+      title: 'Acutis Web Solutions, LLC',
+      session: req.session,
+      env: app.settings.env,
+      host: req.host,
+      articles: articles
+    });
   });
 });
 
-app.get('/blog/article/:article_id', function (req, res) {
-  res.render('article', {
-    title: 'Acutis Web Solutions, LLC',
-    session: req.session,
-    env: app.settings.env,
-    host: req.host
+app.get('/blog/article/:article_id', function (req, res, next) {
+  articles.findOne({where: {id: Number(req.params.article_id)}}, function (err, article){
+    if (err) {
+      next(err);
+      return;
+    }
+
+    if (article) {
+      res.render('article', {
+        title: 'Acutis Web Solutions, LLC',
+        session: req.session,
+        env: app.settings.env,
+        host: req.host,
+        article: article
+      });
+    } else {
+      next('Something went wrong');
+    }
   });
 });
 
@@ -98,15 +131,25 @@ app.get('/admin', requireAdmin, function (req, res) {
   });
 });
 
-app.post('/admin/login', function (req, res) {
-  req.session.user = {};
-  req.session.user.admin = true;
-  res.redirect('/admin');
+app.post('/admin/login', function (req, res, next) {
+  var body = req.body;
+  users.findOne({where: {username: body.username, password: body.password}}, function (err, user) {
+    if (err) {
+      next(err);
+      return;
+    }
+
+    if (user) {
+      req.session.user = user;
+    }
+
+    res.redirect('/admin');
+  });
 });
 
 app.get('/admin/logout', function (req, res) {
   req.session.destroy();
-  res.redirect('/');
+  res.redirect('/admin');
 });
 
 app.get('/admin/users', requireAdmin, function (req, res) {

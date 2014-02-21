@@ -2,4 +2,7 @@ extends master
 
 block body
   .container
-    include partials/articles
+    if articles && articles.length
+      include partials/articles
+    else
+      h1 There doesn't seem to be anything here.

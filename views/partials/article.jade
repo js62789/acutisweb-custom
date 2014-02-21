@@ -1,5 +1,5 @@
 article
   h1 
-    a(href='/blog/article/ABCDEF') Blog Article Title
-  p by Jeffrey Smith
-  p This is a preview of the article. This is a preview of the article. This is a preview of the article. This is a preview of the article. This is a preview of the article. This is a preview of the article. This is a preview of the article. This is a preview of the article. This is a preview of the article. This is a preview of the article. This is a preview of the article.
+    a(href='/blog/article/#{article.id}') #{article.title}
+  p by #{article.author_id}
+  p #{article.content}
