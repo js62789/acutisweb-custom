@@ -12,6 +12,6 @@ block content
           if article
             | #{article.content}
       p
-        input(id='publish', type='checkbox', name='publish', checked=(article ? article.publish : false))
+        input(id='publish', type='checkbox', name='publish', checked=(article && article.publish ? true : false))
         label.label(for='publish') Publish
       input.btn(type='submit', value='Save')

@@ -37,7 +37,7 @@ block content
       .col-sm-3
         label.label(for='admin') Admin
       .col-sm-9
-        input(id='admin', type='checkbox', name='admin', checked=(user ? user.admin : false))
+        input(id='admin', type='checkbox', name='admin', checked=(user && user.admin ? true : false))
     .form-group
       .col-sm-12
         input.btn.btn-primary(type='submit', value='Save')

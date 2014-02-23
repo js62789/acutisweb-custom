@@ -1,6 +1,7 @@
 var path = require('path'),
   http = require('http'),
   express = require('express'),
+  mysql = require('mysql'),
   config = require('./config');
 
 var app = express(),
@@ -49,20 +50,20 @@ app.configure('production', function(){
   app.use(express.errorHandler());
 });
 
-// var MysqlAdapter = require('./lib/adapters/MysqlAdapter');
-// var mysqlAdapter = new MysqlAdapter(config.mysql);
+var MysqlAdapter = require('./lib/adapters/MysqlAdapter');
+var mysqlAdapter = new MysqlAdapter(mysql.createConnection(config.mysql));
 
 var MemoryAdapter = require('./lib/adapters/MemoryAdapter');
 var memoryAdapter = new MemoryAdapter();
 
 var UserCollection = require('./lib/collections/UserCollection');
-var users = new UserCollection({adapter: memoryAdapter});
+var users = new UserCollection({adapter: mysqlAdapter});
 
 var ArticleCollection = require('./lib/collections/ArticleCollection');
-var articles = new ArticleCollection({adapter: memoryAdapter});
+var articles = new ArticleCollection({adapter: mysqlAdapter});
 
 var InquiryCollection = require('./lib/collections/InquiryCollection');
-var inquiries = new InquiryCollection({adapter: memoryAdapter});
+var inquiries = new InquiryCollection({adapter: mysqlAdapter});
 
 var requireAdmin = function (req, res, next) {
   var session = req.session;
@@ -320,7 +321,7 @@ app.get('/admin/article', requireAdmin, function (req, res) {
 app.post('/admin/article', requireAdmin, function (req, res, next) {
   var body = req.body;
   if (body.id) {
-    if (!body.publish) body.publish = false;
+    body.publish = (body.publish === 'on') ? true : false;
 
     articles.update({where: {id: Number(body.id)}}, body, function (err) {
       if (err) {
@@ -331,6 +332,8 @@ app.post('/admin/article', requireAdmin, function (req, res, next) {
       res.redirect('/admin/article/' + body.id);
     });
   } else {
+    body.author_id = req.session.user.id;
+
     articles.create(body, function (err, id) {
       if (err) {
         next(err);
