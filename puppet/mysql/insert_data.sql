@@ -1,4 +1,4 @@
-INSERT INTO `acutis`.`user`
+INSERT IGNORE INTO `acutis`.`user`
 (
   `id`,
   `email`,

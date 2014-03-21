@@ -37,21 +37,21 @@ define apt::ppa (
   }
 }
 
-exec { "first_apt_update":
-  command => "apt-get update; touch /etc/puppet/.firstboot",
-  creates => "/etc/puppet/.firstboot",
-}
-
 exec { "apt_update":
   command => "apt-get update --fix-missing",
   refreshonly => true,
 }
 
+#
+# Install Python Software Properties
+# 
 package { "python-software-properties": 
   ensure => present,
-  require => Exec["first_apt_update"],
 }
 
+#
+# Install Vim
+# 
 package { "vim": 
   ensure => present,
 }
@@ -74,6 +74,11 @@ package { "nginx":
   ensure => present,
 }
 
+service { "nginx":
+  ensure => running,
+  require => Package["nginx"],
+}
+
 file { "/var/www":
   ensure => directory,
   mode => "755",
@@ -90,6 +95,40 @@ apt::ppa { "ppa:chris-lea/node.js":
 
 package { "nodejs":
   ensure => present,
+}
+
+#
+# Install MySQL
+# 
+package { "mysql-server":
+  ensure => present,
+}
+
+service { "mysql":
+  ensure => running,
+  require => Package["mysql-server"],
+}
+
+$mysql_user = "root"
+$mysql_password = "root"
+$mysql_db = "acutis"
+
+exec { "set-mysql-password":
+  unless => "mysqladmin -u${mysql_user} -p$mysql_password status",
+  path => ["/bin", "/usr/bin"],
+  command => "mysqladmin -u${mysql_user} password $mysql_password",
+  require => Service["mysql"],
+}
+
+exec { "build_database":
+  unless => "mysql -u${mysql_user} -p${mysql_password} ${mysql_db}",
+  command => "mysql -u${mysql_user} -p${mysql_password} < /var/www/acutisweb/puppet/mysql/build_database.sql",
+  require => [Exec["set-mysql-password"], Exec["clone_repository"]],
+}
+
+exec { "insert_data":
+  command => "mysql -u${mysql_user} -p${mysql_password} < /var/www/acutisweb/puppet/mysql/insert_data.sql",
+  require => [Exec["build_database"], Exec["clone_repository"]],
 }
 
 #
