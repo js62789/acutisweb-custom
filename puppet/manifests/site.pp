@@ -122,22 +122,47 @@ exec { "set-mysql-password":
 
 exec { "build_database":
   unless => "mysql -u${mysql_user} -p${mysql_password} ${mysql_db}",
-  command => "mysql -u${mysql_user} -p${mysql_password} < /var/www/acutisweb/puppet/mysql/build_database.sql",
-  require => [Exec["set-mysql-password"], Exec["clone_repository"]],
+  command => "mysql -u${mysql_user} -p${mysql_password} < /var/www/acutisweb/puppet/modules/mysql/files/build_database.sql",
+  require => [Exec["set-mysql-password"], Exec["update_repository"]],
 }
 
 exec { "insert_data":
-  command => "mysql -u${mysql_user} -p${mysql_password} < /var/www/acutisweb/puppet/mysql/insert_data.sql",
-  require => [Exec["build_database"], Exec["clone_repository"]],
+  command => "mysql -u${mysql_user} -p${mysql_password} < /var/www/acutisweb/puppet/modules/mysql/files/insert_data.sql",
+  logoutput => true,
+  require => [Exec["build_database"], Exec["update_repository"]],
 }
 
 #
 # Install acutisweb Repo
-# 
+#
+$username = "root"
+$group = $username
+
+file { "/root/.ssh" :
+  ensure => directory,
+  group => $group,
+  owner => $username,
+  mode => 0600,
+}
+
+file { "/root/.ssh/known_hosts" :
+  ensure => file,
+  group => $group,
+  owner => $username,
+  mode => 0600,
+  source => 'puppet:///modules/known_hosts/known_hosts',
+  require => File[ '/root/.ssh' ],
+}
+
 exec { "clone_repository":
-  command => "git clone https://github.com/js62789/acutisweb.git",
+  command => "git clone git@github.com:js62789/acutisweb.git",
   cwd => "/var/www",
-  user => "root",
   creates => "/var/www/acutisweb",
-  require => [File["/var/www"], Package["git"]],
+  require => [File["/var/www"], Package["git"], File["/root/.ssh/known_hosts"]],
+}
+
+exec { "update_repository":
+  command => "git checkout master && git pull",
+  cwd => "/var/www/acutisweb",
+  require => Exec["clone_repository"],
 }
