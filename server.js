@@ -69,6 +69,14 @@ app.configure('production', function(){
     secret: 'supersecret',
     key: env + '_sid'
   }));
+  app.use(lessMiddleware({
+    dest: '/css',
+    src: '/less',
+    prefix: '/css',
+    root: path.join(__dirname, 'public'),
+    compress: 'auto',
+    autoprefix: ["last 7 versions", "> 10%"],
+  }));
   app.use(app.router);
   app.use(express.static(path.join(__dirname, '/public')));
   app.use(notFoundPage());

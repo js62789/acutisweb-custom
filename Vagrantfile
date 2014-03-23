@@ -69,6 +69,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # The url from where the 'prod_config.vm.box' box will be fetched if it
     # doesn't already exist on the user's system.
     prod_config.vm.box_url = "https://github.com/smdahlen/vagrant-digitalocean/raw/master/box/digital_ocean.box"
+
+    prod_config.ssh.private_key_path = '~/.ssh/id_rsa'
+
+    prod_config.vm.provision :shell, :inline => "apt-get install -y puppet-common"
     
     # Provider-specific configuration so you can fine-tune various
     # backing providers for Vagrant. These expose provider-specific options.

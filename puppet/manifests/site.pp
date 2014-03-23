@@ -76,6 +76,9 @@ package { "nginx":
 
 service { "nginx":
   ensure => running,
+  hasstatus => true,
+  hasrestart => true,
+  enable => true,
   require => Package["nginx"],
 }
 
@@ -106,6 +109,9 @@ package { "mysql-server":
 
 service { "mysql":
   ensure => running,
+  hasstatus => true,
+  hasrestart => true,
+  enable => true,
   require => Package["mysql-server"],
 }
 
@@ -199,5 +205,9 @@ file { "/etc/init/acutisweb.conf":
 
 service { "acutisweb":
   ensure => running,
+  hasstatus => true,
+  hasrestart => true,
+  enable => true,
+  provider => "upstart",
   require => [Exec["npm_install"], Exec["install_grunt"]]
 }
