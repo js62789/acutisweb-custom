@@ -170,7 +170,7 @@ exec { "update_repository":
 exec { "npm_install":
   command => "npm install",
   cwd => "/var/www/acutisweb",
-  require => Exec["update_repository"],
+  require => [Package["nodejs"], Exec["update_repository"]],
 }
 
 exec { "install_grunt":

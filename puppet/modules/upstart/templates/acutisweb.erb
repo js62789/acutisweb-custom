@@ -6,7 +6,7 @@ env NPM_BIN=/usr/bin/npm
 env APP_DIR=/var/www/acutisweb
 env APP_NAME="acutisweb"
 env APP_CMD="$NPM_BIN start"
-env LOG_FILE=/var/www/acutisweb/logs/server.js.log
+env LOG_FILE=/var/www/acutisweb/server.js.log
 env RUN_AS="root"        # Upstart can only be run nicely as root, need to drop privileges
 env NODE_ENV=<%= node_env %>
  
