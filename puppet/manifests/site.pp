@@ -177,6 +177,7 @@ exec { "npm_install":
   command => "npm install",
   cwd => "/var/www/acutisweb",
   require => [Package["nodejs"], Exec["update_repository"]],
+  notify => Service["acutisweb"],
 }
 
 exec { "install_grunt":

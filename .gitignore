@@ -1,5 +1,5 @@
 node_modules
-.vagrant
+.vagrant/machines/dev
 
 npm-debug.log
 .DS_Store
