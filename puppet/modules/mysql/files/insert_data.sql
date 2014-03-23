@@ -13,7 +13,7 @@ VALUES
 (
   1,
   'js62789@gmail.com',
-  'jsmith',
+  SHA1(CONCAT('jsmith', '@UHw+C;|G1#_yJvrN%[VY5WNj/FpsKXXj=<bOu)a~g37$|L1nvw)b%CqLd4OV+*T')),
   'jsmith',
   'Jeffrey',
   'Smith',

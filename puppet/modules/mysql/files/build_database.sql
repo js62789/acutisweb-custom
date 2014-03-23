@@ -11,7 +11,7 @@ USE `acutis` ;
 CREATE TABLE IF NOT EXISTS `acutis`.`user` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(50) NULL,
-  `password` VARCHAR(32) NOT NULL,
+  `password` VARCHAR(40) NOT NULL,
   `username` VARCHAR(30) NOT NULL,
   `first_name` VARCHAR(50) NULL,
   `last_name` VARCHAR(50) NULL,

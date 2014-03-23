@@ -1,5 +1,8 @@
 module.exports = {
   port: 3000,
+  keys: {
+    auth_salt: '@UHw+C;|G1#_yJvrN%[VY5WNj/FpsKXXj=<bOu)a~g37$|L1nvw)b%CqLd4OV+*T'
+  }, 
   mysql: {
     host: 'localhost',
     database: 'acutis',

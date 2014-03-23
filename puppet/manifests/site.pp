@@ -166,3 +166,38 @@ exec { "update_repository":
   cwd => "/var/www/acutisweb",
   require => Exec["clone_repository"],
 }
+
+exec { "npm_install":
+  command => "npm install",
+  cwd => "/var/www/acutisweb",
+  require => Exec["update_repository"],
+}
+
+exec { "install_grunt":
+  command => "npm install -g grunt-cli",
+  require => Package["nodejs"],
+}
+
+file { "/etc/nginx/sites-enabled/default":
+  ensure => absent,
+  require => Package["nginx"],
+}
+
+file { "/etc/nginx/sites-enabled/acutisweb.conf":
+  ensure => file,
+  source => "puppet:///modules/nginx/acutisweb.conf",
+  require => [Package["nginx"], Exec["clone_repository"]],
+  notify => Service["nginx"],
+}
+
+file { "/etc/init/acutisweb.conf":
+  ensure => present,
+  source => "puppet:///modules/upstart/acutisweb.conf",
+  require => Exec["clone_repository"],
+  notify => Service["acutisweb"],
+}
+
+service { "acutisweb":
+  ensure => running,
+  require => [Exec["npm_install"], Exec["install_grunt"]]
+}

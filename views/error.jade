@@ -1,0 +1,13 @@
+extends master
+
+block body
+  .construction
+
+    .construction-content
+      h1.brand Acutis Web Solutions
+      .construction-message
+        if error
+          h1 #{error.title}
+        p #{error.message}
+
+  include partials/scripts

@@ -1,0 +1,6 @@
+block scripts
+  if env === 'development'
+    script(src='http://#{host}:35729/livereload.js')
+  else
+    include ga
+  script(src='/js/lib/jquery.min.js')

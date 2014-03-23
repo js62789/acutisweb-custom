@@ -1,25 +1,31 @@
 extends master
 
+block append scripts
+  script(src='/js/app.js')
+
 block header
   .hero
     include partials/header
     .hero-body 
-      h1 Modern Web Applications are Born Here
+      h1 We build cutting-edge web applications.
       a.btn.btn-primary(href='/#strengths') Learn More
 
-block body
+block content
   .featurette.featurette-dark.inverse(id='strengths')
     .container
       .row
-        .col-md-4
+        .col-lg-3.col-md-6
+          h2 Web Services
+          p Acutis Web Solutions builds scalable, standardized web services with automated developer consoles and documentation.
+        .col-lg-3.col-md-6
+          h2 Web Development
+          p We are committed to providing quality web development services to each one of our customers.
+        .col-lg-3.col-md-6
           h2 Server Management
-          p Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah.
-        .col-md-4
-          h2 DB Architecture
-          p Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah.
-        .col-md-4
-          h2 Dynamic Web Apps
-          p Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah blah blah blah blah.
+          p We can build and manage your servers in the cloud. Utilize third-party services for reports or have us build a custom solution.
+        .col-lg-3.col-md-6
+          h2 Marketing
+          p By implementing SEO best practices, our team can help you engage users through marketing campaigns. Integrated analytics allow for a more effective strategy.
 
   .featurette(id='contactus')
     .container
@@ -28,16 +34,24 @@ block body
       form.form.form-min(action='/inquiry', method='POST')
         .form-group
           .col-sm-12
-            input.text-input(type='text', name='name', placeholder='Name')
+            input.text-input(type='text', name='name', placeholder='Name', value=(inquiry && inquiry.name ? inquiry.name : ''))
         .form-group
           .col-sm-6
-            input.text-input(type='tel', name='phone', placeholder='Phone')
+            input.text-input(type='tel', name='phone', placeholder='Phone', value=(inquiry && inquiry.phone ? inquiry.phone : ''))
           .col-sm-6
-            input.text-input(type='email', name='email', placeholder='Email')
+            input.text-input(type='email', name='email', placeholder='Email', value=(inquiry && inquiry.email ? inquiry.email : ''))
         .form-group
           .col-sm-12
             label(for='description') How can we help?
             textarea.text-input(id='description', name='description', rows='5')
+              if inquiry && inquiry.description
+                #{inquiry.description}
+        .form-group
+          .col-sm-12
+            if inquiry && inquiry.error
+              span.error #{inquiry.error}
+            else
+              span.error
         .form-group
           .col-sm-12
               input.btn(type='submit', value='Submit')

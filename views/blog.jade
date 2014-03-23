@@ -1,8 +1,8 @@
 extends master
 
-block body
+block content
   .container
     if articles && articles.length
       include partials/articles
     else
-      h1 There doesn't seem to be anything here.
+      h1 There doesn't seem to be anything here. Please check back later.

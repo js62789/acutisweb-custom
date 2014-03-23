@@ -5,7 +5,7 @@ html
 
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
-    meta(name='description', content='')
+    meta(name='description', content='Acutis Web Solutions LLC is a digital web solutions agency specializing in JavaScript systems. Offering web design, web development, and SEO.')
     meta(name='viewport', content='width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no')
 
     meta(name='apple-mobile-web-app-capable', content='yes')
@@ -20,40 +20,18 @@ html
     // iPad (Retina)
     link(rel='apple-touch-icon', sizes='144x144', href='/img/ios/apple-touch-icon-144x144-precomposed.png')
 
-    block css
-      link(rel='stylesheet', type='text/css', href='/css/index.css')
-      link(rel='stylesheet', type='text/css', href='http://fonts.googleapis.com/css?family=Raleway|Questrial|Alegreya+Sans+SC:300')
+    include partials/styles
         
-  body
-    block header
-      include partials/header
+  block body
+    body
+      block header
+        include partials/header
 
-    block body
+      block content
 
-    block footer
-      footer.footer
-        .container
-          .row
-            .col-sm-8
-              h1 Get Connected
-              ul
-                li Call
-                li Email
-                li Facebook
-                li Twitter
-                li Instagram
-            .col-sm-4
-              h1 Get Around
-              ul
-                li
-                  a(href='/admin') Admin
-                li
-                  a(href='#') Link
-                li
-                  a(href='#') Link
-                li
-                  a(href='#') Link
+      block footer
+        footer.footer
+          .container
+            p Copyright 2014 Acutis Web Solutions LLC
 
-    block scripts
-      if env === 'development'
-        script(src='http://#{host}:35729/livereload.js')
+      include partials/scripts
