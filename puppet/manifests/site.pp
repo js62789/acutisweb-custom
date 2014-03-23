@@ -192,7 +192,7 @@ file { "/etc/nginx/sites-enabled/acutisweb.conf":
 
 file { "/etc/init/acutisweb.conf":
   ensure => present,
-  source => "puppet:///modules/upstart/acutisweb.conf",
+  content => template("upstart/acutisweb.erb"),
   require => Exec["clone_repository"],
   notify => Service["acutisweb"],
 }

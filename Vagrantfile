@@ -51,6 +51,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     docean.image = "Ubuntu 12.04.3 x32"
     docean.region = "New York 2"
     docean.size = "512MB"
+
+    config.vm.provision :puppet do |puppet|
+      puppet.facter = {
+        "node_env" => "development"
+      }
+    end
   end
 
   # Update the server
@@ -65,6 +71,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     puppet.manifests_path = "puppet/manifests"
     puppet.manifest_file  = "site.pp"
     puppet.module_path = "puppet/modules"
+    puppet.facter = {
+      "node_env" => "development"
+    }
     # puppet.options = "--verbose --debug"
   end
 

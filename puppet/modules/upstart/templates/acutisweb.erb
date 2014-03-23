@@ -8,7 +8,7 @@ env APP_NAME="acutisweb"
 env APP_CMD="$NPM_BIN start"
 env LOG_FILE=/var/www/acutisweb/logs/server.js.log
 env RUN_AS="root"        # Upstart can only be run nicely as root, need to drop privileges
-env NODE_ENV=development
+env NODE_ENV=<%= node_env %>
  
 # Start service on startup, stop on shutdown
 start on (local-filesystems and net-device-up IFACE=eth0 and net-device-up IFACE=eth1)
