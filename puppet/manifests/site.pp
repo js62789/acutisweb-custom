@@ -190,9 +190,29 @@ file { "/etc/nginx/sites-enabled/default":
   require => Package["nginx"],
 }
 
+file { "/etc/nginx/nginx.conf":
+  ensure => file,
+  source => "puppet:///modules/nginx/nginx.conf",
+  owner => "root",
+  group => "root",
+  require => Package["nginx"],
+  notify => Service["nginx"],
+}
+
+file { "/etc/nginx/sites-enabled/acutiswebsolutions.conf":
+  ensure => file,
+  source => "puppet:///modules/nginx/acutiswebsolutions.conf",
+  owner => "root",
+  group => "root",
+  require => [Package["nginx"], Exec["clone_repository"]],
+  notify => Service["nginx"],
+}
+
 file { "/etc/nginx/sites-enabled/acutisweb.conf":
   ensure => file,
   source => "puppet:///modules/nginx/acutisweb.conf",
+  owner => "root",
+  group => "root",
   require => [Package["nginx"], Exec["clone_repository"]],
   notify => Service["nginx"],
 }
